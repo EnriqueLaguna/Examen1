@@ -27,3 +27,7 @@ class BackgroundimageReady extends BackgroundimageState{
   @override
   List<Object> get props => [];
 }
+
+class BackgroundimageLoading extends BackgroundimageState{
+  
+}

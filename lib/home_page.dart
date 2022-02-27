@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:examen_uno_app/bloc/backgroundimage_bloc.dart';
+import 'package:examen_uno_app/bloc/countryflags_bloc.dart';
 import 'package:examen_uno_app/bloc/countrytime_bloc_bloc.dart';
 import 'package:examen_uno_app/bloc/motiphrase_bloc.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,19 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  final nombresPaises = [
+    "Andorra",
+    "Mexico",
+    "Peru",
+    "Argentina",
+    "Canada"
+  ];
+
+  static final countryNames = [
+    "ad.png", "mx.png", "pe.png", "ar.png", "ca.png",
+  ];
+
   @override
   Widget build(BuildContext context) {
     return BackdropScaffold(
@@ -28,13 +42,39 @@ class _HomePageState extends State<HomePage> {
             )
           ],
         ),
+        headerHeight: MediaQuery.of(context).size.height * .5,
         backLayer: Container(
-          child: Text("Back Layer"),
+          height: MediaQuery.of(context).size.height * .5 * 0.75,
+          child: ListView.builder(
+            scrollDirection: Axis.vertical,
+            physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+            itemCount: countryNames.length,
+            itemBuilder: (BuildContext context, int index) {
+              final flagAPI = "https://flagcdn.com/16x12/";
+              return ListTile(
+                leading: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Image.network('${flagAPI}${countryNames[index]}'),
+                ),
+                title: Text(nombresPaises[index], style: TextStyle(color: Colors.white),),
+                onTap: () {
+                  setState((){
+                    BlocProvider.of<CountrytimeBlocBloc>(context).paisSeleccionado = index;
+                    BlocProvider.of<CountrytimeBlocBloc>(context).add( LoadCountrytimeBloc());
+                    BlocProvider.of<MotiphraseBloc>(context).add( LoadMotiPhrase());
+                    BlocProvider.of<BackgroundimageBloc>(context).add( LoadBackgroundimage());
+                    
+                  });
+                },
+              );
+            },
+          ),
         ),
         frontLayer: Column(
           children: <Widget>[
             BlocConsumer<BackgroundimageBloc, BackgroundimageState>(
-              listener: (context, state) {},
+              listener: (context, state) {
+              },
               builder: (context, state) {
                 if (state is BackgroundimageReady) {
                   return Stack(children: <Widget>[
@@ -78,13 +118,16 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ));
                         } else {
-                          return Text("Algo se murio xd");
+                          return Text("");
                         }
                       },
                     ),
                     BlocConsumer<MotiphraseBloc, MotiphraseState>(
                       listener: (context, stateF) {
                         // TODO: implement listener
+                      },
+                      buildWhen: (context, stateF) {
+                        return state is BackgroundimageReady;
                       },
                       builder: (context, stateF) {
                         if(stateF is MotiphraseErrorState){
@@ -116,15 +159,23 @@ class _HomePageState extends State<HomePage> {
                               )
                           );
                         } else {
-                          return Text("Algo se murio x2 xd");
+                          return Text("");
                         }
                       },
                     )
                   ]);
                 } else if (state is BackgroundimageErrorState) {
                   return Text("Imagen no pudo ser cargada");
+                } else if (state is BackgroundimageLoading) {
+                  return Padding(
+                    padding:EdgeInsets.only(top: MediaQuery.of(context).size.height / 2),
+                    child: Center(child: CircularProgressIndicator()),
+                  );
                 } else {
-                  return Text("Algo paso xd");
+                  return Padding(
+                    padding:EdgeInsets.only(top: MediaQuery.of(context).size.height / 2),
+                    child: Center(child: CircularProgressIndicator()),
+                  );
                 }
               },
             )

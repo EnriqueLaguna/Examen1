@@ -22,8 +22,8 @@ class CountrytimeBlocBloc extends Bloc<CountrytimeBlocEvent, CountrytimeBlocStat
     "Andorra",
     "Mexico",
     "Peru",
+    "Argentina",
     "Canada",
-    "Argentina"
   ];
 
   //Tiempo_paises
@@ -31,8 +31,8 @@ class CountrytimeBlocBloc extends Bloc<CountrytimeBlocEvent, CountrytimeBlocStat
     "Europe/Andorra",
     "America/Mexico_City",
     "America/Lima",
+    "America/Argentina/Buenos_Aires",
     "America/Vancouver",
-    "America/Argentina/Buenos_Aires"
   ];
   //URL para las frases
   final String url = "http://worldtimeapi.org/api/timezone/";

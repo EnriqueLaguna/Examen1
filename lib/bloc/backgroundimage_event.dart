@@ -10,4 +10,3 @@ abstract class BackgroundimageEvent extends Equatable {
 class LoadBackgroundimage extends BackgroundimageEvent {
   
 }
-

@@ -1,3 +1,5 @@
+
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:http/http.dart';
@@ -17,7 +19,6 @@ class BackgroundimageBloc extends Bloc<BackgroundimageEvent, BackgroundimageStat
 
   //Url para la imagen
   final String url = "https://picsum.photos/v2/list";
-
   
   void loadBackgroundimage(BackgroundimageEvent Levent, Emitter emit) async {
     var imagen = await _getBackgroundimage();
@@ -26,7 +27,8 @@ class BackgroundimageBloc extends Bloc<BackgroundimageEvent, BackgroundimageStat
     //Elegir una imagen al azar
     var randomImageNumber = Random().nextInt(30);
     String urlImagenSeleccionada = imagen[randomImageNumber]["download_url"];
-    //print(urlImagenSeleccionada);
+    print(urlImagenSeleccionada);
+    emit(BackgroundimageLoading());
     if (imagen == null){
       emit(BackgroundimageErrorState(errMsg: 'No se pudo cargar la imagen'));
     } else {
