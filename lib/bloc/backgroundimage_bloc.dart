@@ -21,12 +21,12 @@ class BackgroundimageBloc extends Bloc<BackgroundimageEvent, BackgroundimageStat
   
   void loadBackgroundimage(BackgroundimageEvent Levent, Emitter emit) async {
     var imagen = await _getBackgroundimage();
-    print(imagen);
+    //print(imagen);
 
     //Elegir una imagen al azar
     var randomImageNumber = Random().nextInt(30);
     String urlImagenSeleccionada = imagen[randomImageNumber]["download_url"];
-    print(urlImagenSeleccionada);
+    //print(urlImagenSeleccionada);
     if (imagen == null){
       emit(BackgroundimageErrorState(errMsg: 'No se pudo cargar la imagen'));
     } else {
@@ -39,10 +39,8 @@ class BackgroundimageBloc extends Bloc<BackgroundimageEvent, BackgroundimageStat
     try{
       Response res = await get(Uri.parse(url));
       if(res.statusCode == HttpStatus.ok){
-        return jsonDecode(res.body);
-        
+        return jsonDecode(res.body); 
       }
-
     } catch (e){
       print(e);
     }
