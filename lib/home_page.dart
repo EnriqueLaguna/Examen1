@@ -1,9 +1,6 @@
 import 'dart:ui';
 
-import 'package:examen_uno_app/bloc/backgroundimage_bloc.dart';
 import 'package:examen_uno_app/bloc/bloc/allthings_bloc.dart';
-import 'package:examen_uno_app/bloc/countrytime_bloc_bloc.dart';
-import 'package:examen_uno_app/bloc/motiphrase_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:backdrop/backdrop.dart';
 import 'package:flutter/rendering.dart';
@@ -148,122 +145,6 @@ class _HomePageState extends State<HomePage> {
                 }
               },
             )
-          //   BlocConsumer<BackgroundimageBloc, BackgroundimageState>(
-          //     listener: (context, state) {
-          //     },
-          //     builder: (context, state) {
-          //       if (state is BackgroundimageReady) {
-          //         return Stack(children: <Widget>[
-          //           Container(
-          //             child: Image.network(state.imageUrl,
-          //                 height: MediaQuery.of(context).size.height - 80,
-          //                 width: MediaQuery.of(context).size.width,
-          //                 fit: BoxFit.fill,
-          //                 loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
-          //                   if (loadingProgress == null){
-          //                     return child;
-          //                   }
-          //                   return Center(
-          //                     child: CircularProgressIndicator(),
-          //                   );
-          //                 },
-          //             )
-          //           ),
-          //           Container(
-          //             color: Colors.black.withOpacity(0.50),
-          //             height: MediaQuery.of(context).size.height - 80,
-          //             width: MediaQuery.of(context).size.width,
-          //           ),
-          //           BlocConsumer<CountrytimeBlocBloc, CountrytimeBlocState>(
-          //             listener: (context, stateC) {
-          //               // TODO: implement listener
-          //             },
-          //             builder: (context, stateC) {
-          //               if (stateC is CountrytimeBlocErrorState) {
-          //                 return Center(
-          //                   child: Text("No se pudo cargar la hora"),
-          //                 );
-          //               } else if (stateC is CountrytimeBlocReady) {
-          //                 return Padding(
-          //                     padding: EdgeInsets.all(10),
-          //                     child: Center(
-          //                       child: Column(
-          //                         children: [
-          //                           Text(
-          //                             "${stateC.pais}",
-          //                             style: TextStyle(
-          //                                 color: Colors.white, fontSize: 20),
-          //                           ),
-          //                           Text(
-          //                             "${stateC.tiempo}",
-          //                             style: TextStyle(
-          //                                 color: Colors.white, fontSize: 45),
-          //                           ),
-          //                         ],
-          //                       ),
-          //                     ));
-          //               } else {
-          //                 return Text("");
-          //               }
-          //             },
-          //           ),
-          //           BlocConsumer<MotiphraseBloc, MotiphraseState>(
-          //             listener: (context, stateF) {
-          //               // TODO: implement listener
-          //             },
-          //             buildWhen: (context, stateF) {
-          //               return state is BackgroundimageReady;
-          //             },
-          //             builder: (context, stateF) {
-          //               if(stateF is MotiphraseErrorState){
-          //                 return Padding(
-          //                 padding: EdgeInsets.only(
-          //                     top: MediaQuery.of(context).size.height / 2),
-          //                     child: Center(child: Text("No se pudo cargar la frase")),
-          //                 );
-          //               }
-          //               else if (stateF is MotiphraseReady){
-          //                 return Padding(
-          //                 padding: EdgeInsets.only(
-          //                     top: MediaQuery.of(context).size.height / 2,
-          //                     left: 10,
-          //                     right: 10,
-          //                     ),
-          //                     child: Center(
-          //                       child: Column(
-          //                         crossAxisAlignment: CrossAxisAlignment.start,
-          //                         children: [
-          //                             Text("${stateF.frase}",
-          //                             style: TextStyle(
-          //                                 color: Colors.white, fontSize: 20),),
-          //                             Text("- ${stateF.autor}",
-          //                             style: TextStyle(
-          //                                 color: Colors.white, fontSize: 20),),
-          //                         ],
-          //                       ),
-          //                     )
-          //                 );
-          //               } else {
-          //                 return Text("");
-          //               }
-          //             },
-          //           )
-          //         ]);
-          //       } else if (state is BackgroundimageErrorState) {
-          //         return Text("Imagen no pudo ser cargada");
-          //       } else if (state is BackgroundimageLoading) {
-          //         return Padding(
-          //           padding:EdgeInsets.only(top: MediaQuery.of(context).size.height / 2),
-          //           child: Center(child: CircularProgressIndicator()),
-          //         );
-          //       } else {
-          //         return Padding(
-          //           padding:EdgeInsets.only(top: MediaQuery.of(context).size.height / 2),
-          //           child: Center(child: CircularProgressIndicator()),
-          //         );
-          //       }
-          //     },
-          //   )
           ],
         ));
   }
